@@ -16,7 +16,9 @@ namespace School.Infrastructure.Configrations
             builder.ToTable("Students");
             builder.HasOne(i => i.Instructor)
              .WithMany();
-            
+            builder.HasData(new Student { Id = 1, FullName = "Hala", InstructorId = 1 },
+                new Student { Id = 2, FullName = "Hana", InstructorId = 2 },
+                new Student { Id = 3, FullName = "Hanaa", InstructorId = 3 });
 
         }
     }

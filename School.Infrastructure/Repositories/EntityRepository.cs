@@ -1,0 +1,55 @@
+﻿using Microsoft.EntityFrameworkCore;
+using School.Domain.Repositories.Interfaces.Generic;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace School.Infrastructure.Repositories
+{
+    public class EntityRepository<T> : IEntityRepository<T>where T : class
+    {
+        #region field
+        private readonly SchoolDbContext _dbContext;
+        #endregion
+
+        #region constructor
+        public EntityRepository(SchoolDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+        #endregion
+
+        #region methods
+        public async Task<T> Add(T entity)
+        {
+           await _dbContext.Set<T>().AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
+            return entity;
+        }
+
+        public async Task Delete(T entity)
+        {
+            _dbContext.Set<T>().Remove(entity);
+            await _dbContext.SaveChangesAsync() ;
+        }
+
+        public async Task<IEnumerable<T>> GetAll()
+        {
+           return await _dbContext.Set<T>().ToListAsync();
+        }
+
+        public async Task<T> GetById(int id)
+        {
+            return await _dbContext.Set<T>().FindAsync(id);
+        }
+
+        public async Task Update(T entity)
+        {
+            _dbContext.Set<T>().Update(entity);
+            await _dbContext.SaveChangesAsync();
+        }
+        #endregion
+    }
+}

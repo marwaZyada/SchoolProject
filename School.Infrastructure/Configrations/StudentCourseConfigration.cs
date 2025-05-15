@@ -25,6 +25,10 @@ namespace School.Infrastructure.Configrations
           builder.HasOne(sc => sc.Course)
                 .WithMany(c => c.StudentCourses)
                 .HasForeignKey(sc => sc.CourseId);
+
+            builder.HasData(new StudentCourse { StudentId = 1, CourseId = 1 },
+                new StudentCourse { StudentId = 2, CourseId = 1 },
+                new StudentCourse { StudentId = 1, CourseId = 2 });
         }
     }
 }
