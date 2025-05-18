@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using School.Application.Handlers.CourseHandelers.Commands_.CreateCourse;
+using School.Application.Handlers.CourseHandelers.Commands_.UpdateCourse;
 using School.Application.Handlers.CourseHandelers.Dto;
 using School.Domain.Entities;
 using System;
@@ -16,6 +17,7 @@ namespace School.Application.Handlers.CourseHandelers.Mapper
         {
             CreateMap<Course, CourseDto>().ReverseMap();
             CreateMap<CreateCourseCommand, Course>();
+            CreateMap<UpdateCourseCommand,Course>();
         }
     }
 }

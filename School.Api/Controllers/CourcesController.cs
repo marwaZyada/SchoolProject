@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using School.Application.Handlers.CourseHandelers.Commands_.CreateCourse;
 using School.Application.Handlers.CourseHandelers.Commands_.DeleteCourse;
+using School.Application.Handlers.CourseHandelers.Commands_.UpdateCourse;
 using School.Application.Handlers.CourseHandelers.Queries.GetAll;
 using School.Application.Handlers.CourseHandelers.Queries.GetById;
 using School.Domain.Entities;
@@ -53,6 +54,17 @@ namespace School.Api.Controllers
         {
 
             var result = await _mediator.Send(new DeleteCourseCommand() { id=id});
+            return Ok(result);
+
+
+        }
+
+
+        [HttpPut]
+        public async Task<IActionResult> update(UpdateCourseCommand model)
+        {
+
+            var result = await _mediator.Send(model );
             return Ok(result);
 
 
