@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Win32;
+using School.Application;
 using School.Infrastructure;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
@@ -16,7 +18,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<SchoolDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+//register application(midiatR,automapper)
+builder.Services.AddApplication();
 
+// register Infrastructure
+builder.Services.AddInfrastructure();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

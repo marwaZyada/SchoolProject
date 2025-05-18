@@ -3,6 +3,7 @@ using School.Domain.Repositories.Interfaces.Generic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -35,14 +36,39 @@ namespace School.Infrastructure.Repositories
             await _dbContext.SaveChangesAsync() ;
         }
 
-        public async Task<IEnumerable<T>> GetAll()
+        public async Task<IReadOnlyList<T>> GetAll()
         {
            return await _dbContext.Set<T>().ToListAsync();
+        }
+
+        public async Task<IReadOnlyList<T>> GetAll(params Expression<Func<T, object>>[] Includes)
+        {
+            var Query = _dbContext.Set<T>().AsQueryable();
+            foreach (var item in Includes)
+            {
+              Query= Query.Include(item);
+            }
+            return await Query.ToListAsync();
         }
 
         public async Task<T> GetById(int id)
         {
             return await _dbContext.Set<T>().FindAsync(id);
+        }
+
+        public async Task<T> GetById(int id,params Expression<Func<T, object>>[] Includes)
+        {
+            var Query = _dbContext.Set<T>();
+            foreach (var item in Includes)
+            {
+             Query.Include(item);
+            }
+            return await Query.FindAsync(id);
+        }
+
+        public IQueryable<T> GetWithNoTracking()
+        {
+           return _dbContext.Set<T>();
         }
 
         public async Task Update(T entity)
