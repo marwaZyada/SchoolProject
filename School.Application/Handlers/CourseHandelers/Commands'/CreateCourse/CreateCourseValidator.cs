@@ -14,12 +14,12 @@ namespace School.Application.Handlers.CourseHandelers.Commands_.CreateCourse
     {
         public CreateCourseValidator()
         {
-            ApplyRules();
+            RuleFor(c => c.Title).NotEmpty().NotNull().WithMessage("Course Title Can't be null");
+            RuleFor(c => c.Title).MinimumLength(3).WithMessage("Course title length can't be less than 3 character");
         }
         public void ApplyRules()
         {
-            RuleFor(c => c.Title).NotNull().WithMessage("Course Title Can't be null");
-            RuleFor(c => c.Title).MinimumLength(3).WithMessage("Course title length can't be less than 3 character");
+           
         }
     }
 }

@@ -16,10 +16,26 @@ namespace School.Application.Services
         {
            _unitOfWork = unitOfWork;
         }
-        public async Task<string> Coursetitle(Course course)
+
+        public async Task<string> AddCourse(Course course)
         {
-          await _unitOfWork.CourseRepository.Add(course);
-          await  _unitOfWork.SaveChanges();
+            await _unitOfWork.CourseRepository.Add(course);
+            await _unitOfWork.SaveChanges();
+            return course.Title;
+        }
+
+
+        public async Task<string> DeleteCourse(Course course)
+        {
+            await _unitOfWork.CourseRepository.Delete(course);
+            await _unitOfWork.SaveChanges();
+            return course.Title;
+        }
+
+        public async Task<string> UpdateCourse(Course course)
+        {
+            await _unitOfWork.CourseRepository.Update(course);
+            await _unitOfWork.SaveChanges();
             return course.Title;
         }
     }

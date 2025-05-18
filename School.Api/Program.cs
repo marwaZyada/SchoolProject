@@ -1,15 +1,22 @@
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32;
 using School.Application;
+using School.Application.Handlers.CourseHandelers.Commands_.CreateCourse;
 using School.Infrastructure;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
+using System.Reflection;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+// Register validators from Application layer assembly
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

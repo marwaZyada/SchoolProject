@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using School.Application.Handlers.CourseHandelers.Commands_.CreateCourse;
+using School.Application.Handlers.CourseHandelers.Commands_.DeleteCourse;
 using School.Application.Handlers.CourseHandelers.Queries.GetAll;
 using School.Application.Handlers.CourseHandelers.Queries.GetById;
 using School.Domain.Entities;
@@ -40,21 +41,21 @@ namespace School.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(CreateCourseCommand model)
         {
-            //try
-            //{
-                if (!ModelState.IsValid) return BadRequest();
-
+            
                 var course =await _mediator.Send( model);
                  return Ok(course);
-               
-                
-           // }
-          //  catch (Exception ex)
-          //  {
-
-          //return BadRequest(  ex);
-          //  }
+       
            
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete( int id)
+        {
+
+            var result = await _mediator.Send(new DeleteCourseCommand() { id=id});
+            return Ok(result);
+
+
         }
     }
 }

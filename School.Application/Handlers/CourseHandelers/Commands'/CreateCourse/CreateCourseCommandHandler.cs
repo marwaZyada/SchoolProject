@@ -27,8 +27,8 @@ namespace School.Application.Handlers.CourseHandelers.Commands_.CreateCourse
         public async Task<string> Handle(CreateCourseCommand request, CancellationToken cancellationToken)
         {
             var course = _mapper.Map<Course>(request);
-            var title =await _coursService.Coursetitle(course);
-            return title;
+            var title =await _coursService.AddCourse(course);
+            return $"{title} has been added";
         }
     }
 }

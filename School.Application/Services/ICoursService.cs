@@ -9,7 +9,8 @@ namespace School.Application.Services
 {
     public interface ICoursService
     {
-
-      Task<string> Coursetitle(Course course) ;
+        Task<string> DeleteCourse(Course course);
+        Task<string> AddCourse(Course course) ;
+        Task<string> UpdateCourse(Course course);
     }
 }
