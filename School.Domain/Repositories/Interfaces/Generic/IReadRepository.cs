@@ -11,6 +11,7 @@ namespace School.Domain.Repositories.Interfaces.Generic
     {
        Task< IReadOnlyList<T>> GetAll();
        Task< T> GetById(int id);
+        Task<T> Get(Expression<Func<T, bool>> predicate) ;
         Task<IReadOnlyList<T>> GetAll(params Expression<Func<T,object>>[] Includes);
        IQueryable<T> GetWithNoTracking();   
         Task<T> GetById(int id,params Expression<Func<T, object>>[] Includes);

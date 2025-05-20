@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using School.Application.Handlers.CourseHandelers.Commands_.CreateCourse;
@@ -24,6 +25,7 @@ namespace School.Api.Controllers
             _mapper = mapper;
         }
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Get()
         {
           var cources= await _mediator.Send(new GetAllCourseQuery());

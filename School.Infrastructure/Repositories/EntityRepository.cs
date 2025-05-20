@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using School.Domain.Entities.Authentication;
 using School.Domain.Repositories.Interfaces.Generic;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,11 @@ namespace School.Infrastructure.Repositories
         {
             _dbContext.Set<T>().Remove(entity);
             await _dbContext.SaveChangesAsync() ;
+        }
+
+        public async Task<T> Get(Expression<Func<T, bool>> predicate)
+        {
+            return await _dbContext.Set<T>().FirstOrDefaultAsync(predicate);
         }
 
         public async Task<IReadOnlyList<T>> GetAll()
